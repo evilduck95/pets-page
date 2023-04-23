@@ -1,0 +1,30 @@
+
+.dosage-cell {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin-top: 5px;
+}
+
+.dosage-time {
+    color: black;
+    /* No Mouse Plz :3 */
+    -webkit-user-select: none; /* Safari */        
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none; /* Standard */
+}
+
+.dosage-indicator { 
+    width: 100%;
+    padding: 0 1em;
+    border-top: 1px black;
+}
+
+.dosage-given {
+    background-color: greenyellow;
+}
+
+.dosage-pending {
+    background-color: red;
+}

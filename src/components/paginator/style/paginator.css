@@ -1,0 +1,28 @@
+#paginator {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    color: aliceblue;
+    width: 30vw;
+    margin: auto;
+}
+
+#date-info {
+    font-size: large;
+    justify-self: center;
+}
+
+.week-day-nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    
+}
+
+.week-day-nav:hover {
+    cursor: pointer;
+}
+
+.week-day-nav > * {
+    font-size: xx-large;
+}

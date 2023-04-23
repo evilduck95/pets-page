@@ -1,0 +1,9 @@
+
+.table-container {
+    padding: 2em;
+}
+
+.table-container > * {
+    color: aliceblue !important;
+}
+

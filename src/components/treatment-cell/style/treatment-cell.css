@@ -1,0 +1,52 @@
+
+.treatment-cell {
+    padding: 0 !important;
+}
+
+.treatment-list {
+    overflow-y: scroll;
+    padding: 0 !important;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+.treatment-list::-webkit-scrollbar {
+    display: none;
+}
+
+.treat-button {
+    color: black;
+    background-color: aqua;
+    margin-top: 5px;
+    width: 100%;
+    padding-left: 1em;
+    /* No Mouse Plz :3 */
+    -webkit-user-select: none; /* Safari */        
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none; /* Standard */
+}
+
+.add-treatment-entry {
+    display: flex;
+    justify-content: center;
+    /* padding: 5px 10px 0 10px; */
+}
+
+.add-treatment-input {
+    /* height: 2em; */
+    /* margin: 5px 10px 0 10px; */
+    width: 100%;
+    /* transition: 1s all ease-in-out; Use this when we have all the other styling ok */
+}
+
+.add-treatment-button {
+    padding: 5px 0 10px 0;
+    text-align: center;
+    transition: 0.2s all ease-in-out;
+    width: 100%;
+}
+
+.add-treatment-button > * {
+    font-size: x-large;
+}
