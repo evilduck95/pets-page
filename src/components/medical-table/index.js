@@ -2,7 +2,7 @@ import { Table } from "react-bootstrap";
 import { useSearchParams } from "react-router-dom";
 import MedicalRow from "components/medical-row";
 import { useEffect, useState } from "react";
-import { petTreatments } from "utils/pet-api";
+import { petTreatments, petDetails } from "utils/pet-api";
 
 import './style/medical-table.css'
 
@@ -40,21 +40,24 @@ exampleTreatment.treatments.forEach(t => t.date = new Date(Date.parse(t.date)));
 
 const MedicalTable = ({ sinceDate }) => {
     const [treatments, setTreatments] = useState([]);
-    
-    useEffect(() => {
-        petTreatments('benji', sinceDate, setTreatments);
-    }, [sinceDate]);
+    const [prescriptions, setPrescriptions] = useState([]);
 
-    // console.log(treatments);
-    
     const [searchParams, _] = useSearchParams();
     const petName = searchParams.get("name");
+    
+    useEffect(() => {
+        if(!!petName) {
+            petDetails(petName, petDetails => setPrescriptions(petDetails.prescriptions));
+            petTreatments(petName, sinceDate, setTreatments);
+        }
+    }, [sinceDate]);
+    
     const renderTableHeader = () => {
         const daysOfTheWeek = new Array(7).fill().map((_, i) => {
             const day = new Date();
             day.setDate(sinceDate.getDate() + i);
             return DAYS_OF_WEEK[day.getDay()];
-        }) 
+        });
         
         return (
             <thead>
@@ -64,15 +67,21 @@ const MedicalTable = ({ sinceDate }) => {
         );
     };
 
+    const findTreatemnts = (medicationName) => {
+        const matching = treatments.find(t => t.medicationName === medicationName);
+        return matching?.treatments || [];
+    }
+ 
     return (
         <div className="table-container">
             <Table striped bordered hover>
                 {renderTableHeader()}
-                {treatments.map(t => 
+                {prescriptions.map(p => 
                     <MedicalRow 
-                        medicationName={t.medicationName} 
-                        startDate={sinceDate} 
-                        treatments={t.treatments}
+                        key={p.medication}
+                        medicationName={p.medication} 
+                        startDate={sinceDate}
+                        treatments={findTreatemnts(p.medication)}
                     />)
                 }
                 

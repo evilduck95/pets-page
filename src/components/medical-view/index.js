@@ -1,5 +1,8 @@
 import Paginator from "components/paginator"
 import MedicalTable from "components/medical-table"
+import { useSearchParams } from "react-router-dom";
+import { createBrowserHistory } from "history";
+import qs from 'qs';
 import { useState } from "react"
 
 const MedicalView = () => {
@@ -10,23 +13,22 @@ const MedicalView = () => {
         return date;
     }
 
-    const [startDate, setStartDate] = useState(_previousMonday());
+    const [searchParams, _] = useSearchParams();
+    const dateParam = searchParams.get("startDate");
 
-    const _shiftDate = (offset) => {
-        const newStartDate = new Date();
-        newStartDate.setDate(startDate.getDate() + offset);
+    const [startDate, setStartDate] = useState(dateParam || _previousMonday());
+
+    const _shiftDate = (offsetMillis) => {
+        const newStartDate = new Date(startDate.getTime() + offsetMillis);
         setStartDate(newStartDate);
     }
-
-    console.log('Date', startDate);
 
     return (
         <div>
             <Paginator firstDayDate={startDate} setDateCallback={_shiftDate}/>
             <MedicalTable sinceDate={startDate} />
         </div>
-
-    )
+    );
 }
 
 export default MedicalView;

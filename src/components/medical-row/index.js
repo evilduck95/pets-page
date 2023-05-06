@@ -1,10 +1,20 @@
 import TreatmentCell from "components/treatment-cell";
+import { WEEK_MILLIS } from "components/paginator";
+
 
 import './style/medical-row.css'
 
 const MedicalRow = ({medicationName, startDate, treatments}) => {
 
-    console.log(medicationName, treatments);
+    // TODO: NEED TO QUERY THE DATABASE FOR THESE, WE DON'T HAVE THEM OUTSIDE THE CURRENT WEEK VIEW.
+    const hasFutureTreatments = () => {
+        const endOfWeek = new Date(startDate.getTime() + WEEK_MILLIS);
+        return treatments.some(t => t.dateTime > endOfWeek);
+    }
+
+    const hasPastTreatments = () => {
+        return treatments.some(t => t.dateTime < startDate);
+    }
 
     const days = [];
     for (let i = 0; i < 7; i++) {
@@ -23,10 +33,16 @@ const MedicalRow = ({medicationName, startDate, treatments}) => {
         }
     }
 
+    const buildCells = () => {
+        if (hasPastTreatments()) days[0].pastTreatments = true;
+        if (hasFutureTreatments()) days[6].futureTreatments = true;
+        return ;
+    }
+
     return(
         <tr>
             <th scope="row">{medicationName}</th>
-            {days.map(d => <td><TreatmentCell treatments={d.treatments}/></td>)}
+            {days.map(d => <td key={d.dateTime}><TreatmentCell treatments={d.treatments}/></td>)}
         </tr>
     )
 }

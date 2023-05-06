@@ -17,6 +17,18 @@ const petTreatments = (petName, sinceDate, callbackSetter) => {
     .then(data => callbackSetter(data));
 };
 
+const petDetails = (petName, callbackSetter) => {
+    const config = {
+        params: {
+            name: petName
+        }
+    };
+    api.get('/pet', config)
+    .then(res => res.data)
+    .then(data => callbackSetter(data));
+}
+
 export {
-    petTreatments
+    petTreatments,
+    petDetails
 };
