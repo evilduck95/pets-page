@@ -55,10 +55,10 @@ const MedicalTable = ({ sinceDate }) => {
     const renderTableHeader = () => {
         const daysOfTheWeek = new Array(7).fill().map((_, i) => {
             const day = new Date();
-            day.setDate(sinceDate.getDate() + i);
+            const daysIntoWeek = 86400000 * i;
+            day.setTime(sinceDate.getTime() + daysIntoWeek);
             return DAYS_OF_WEEK[day.getDay()];
         });
-        
         return (
             <thead>
                 <th>{petName}</th>

@@ -42,7 +42,7 @@ const MedicalRow = ({medicationName, startDate, treatments}) => {
     return(
         <tr>
             <th scope="row">{medicationName}</th>
-            {days.map(d => <td key={d.dateTime}><TreatmentCell treatments={d.treatments}/></td>)}
+            {days.map(d => <td key={d.date}><TreatmentCell medicationName={medicationName} dateStartOfDay={d.date} treatments={d.treatments}/></td>)}
         </tr>
     )
 }

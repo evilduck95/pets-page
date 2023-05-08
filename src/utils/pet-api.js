@@ -28,6 +28,18 @@ const petDetails = (petName, callbackSetter) => {
     .then(data => callbackSetter(data));
 }
 
+const addTreatment = (petName, medicationName, dateTime, resultCallback) => {
+    const data = {
+        petName: petName,
+        medicationName: medicationName,
+        treatmentTime: dateTime,
+        missed: false
+    };
+    api.post('/treat', data)
+    .then(res => res.status)
+    .then(status => resultCallback(status));
+}
+
 export {
     petTreatments,
     petDetails
