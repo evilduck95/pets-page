@@ -28,13 +28,14 @@ const petDetails = (petName, callbackSetter) => {
     .then(data => callbackSetter(data));
 }
 
-const addTreatment = (petName, medicationName, dateTime, resultCallback) => {
+const addTreatment = (petName, medicationName, dateTime, resultCallback, missed = false) => {
     const data = {
         petName: petName,
         medicationName: medicationName,
-        treatmentTime: dateTime,
-        missed: false
+        treatementTime: dateTime.toISOString(),
+        missed: missed
     };
+    console.log('Body', data)
     api.post('/treat', data)
     .then(res => res.status)
     .then(status => resultCallback(status));
@@ -42,5 +43,6 @@ const addTreatment = (petName, medicationName, dateTime, resultCallback) => {
 
 export {
     petTreatments,
-    petDetails
+    petDetails,
+    addTreatment
 };

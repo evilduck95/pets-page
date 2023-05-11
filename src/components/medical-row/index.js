@@ -19,7 +19,7 @@ const MedicalRow = ({medicationName, startDate, treatments}) => {
     const days = [];
     for (let i = 0; i < 7; i++) {
         const nextDay = new Date();
-        nextDay.setDate(startDate.getDate() + i);
+        nextDay.setTime(startDate.getTime() + (i * 86400000));
         days.push({date: nextDay, treatments: []});
     }
 

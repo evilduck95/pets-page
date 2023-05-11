@@ -1,24 +1,31 @@
 import TreatmentEntry from 'components/treatment-entry';
-import {AiOutlinePlusCircle} from 'react-icons/ai';
 import { BiChevronsLeft, BiChevronsRight } from 'react-icons/bi';
 import { TimePicker } from '@mui/x-date-pickers';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-
-import './style/treatment-cell.css';
+import { useSearchParams } from "react-router-dom";
 import { useEffect, useState } from 'react';
 import ClickOutsideAlerter from 'components/click-outside-alerter';
+import { addTreatment } from 'utils/pet-api';
+
+
+import './style/treatment-cell.css';
+
 
 const TreatmentCell = ({ medicationName, dateStartOfDay, treatments, beforeIndicator, afterIndicator, clickOutside }) => {
     const [choosingDate, setChoosingDate] = useState(false);
 
     useEffect(() => setChoosingDate(clickOutside), [clickOutside]);
+    const [searchParams, _] = useSearchParams();
+    const petName = searchParams.get("name");
 
-    const treatPet = (treatmentTime) => {
+    const treatPet = (treatmentTimeToday) => {
+      console.log('Cell Date', dateStartOfDay);
         const day = new Date(dateStartOfDay);
-        const time = treatmentTime.$d;
+        const time = treatmentTimeToday.$d;
         console.log(time, day);
-        day.setUTCHours(time.getHours(), time.getUTCMinutes());
+        day.setUTCHours(time.getUTCHours(), time.getUTCMinutes(), 0, 0);
         console.log('Treat', day);
+        addTreatment(petName, medicationName, day, res => console.log(res));
     }
 
     const color = 'aliceblue';
@@ -72,7 +79,7 @@ const TreatmentCell = ({ medicationName, dateStartOfDay, treatments, beforeIndic
                 </div>
             </ClickOutsideAlerter>
             <div className="treatment-list">
-                {treatments.map(t => <TreatmentEntry date={t.dateTime} givenFlag={t.given} />)}
+                {treatments.map(t => <TreatmentEntry date={t.dateTime} givenFlag={t.given} medicationName={medicationName}/>)}
             </div>
             {afterIndicator && <BiChevronsRight/>}
         </div>
