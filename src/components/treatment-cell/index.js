@@ -79,7 +79,7 @@ const TreatmentCell = ({ medicationName, dateStartOfDay, treatments, beforeIndic
                 </div>
             </ClickOutsideAlerter>
             <div className="treatment-list">
-                {treatments.map(t => <TreatmentEntry date={t.dateTime} givenFlag={t.given} medicationName={medicationName}/>)}
+                {treatments.map(t => <TreatmentEntry treatmentId={t.id} date={t.dateTime} givenFlag={t.given}/>)}
             </div>
             {afterIndicator && <BiChevronsRight/>}
         </div>
