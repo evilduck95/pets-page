@@ -1,6 +1,6 @@
-import axios, { Axios } from "axios";
+import axios from "axios";
 
-const apiUrl = 'http://localhost:8100';
+const apiUrl = 'http://192.168.1.102:8100';
 
 const api = axios.create({
     baseURL: apiUrl,
@@ -52,9 +52,19 @@ const amendTreatment = (id, given, resultCallback) => {
     .then(given => resultCallback(given));
 }
 
+const deleteTreatment = (id, resultCallback) => {
+    const params = {
+        id: id
+    };
+    api.delete('/treatment', { params: params })
+    .then(res => res.status)
+    .then(status => resultCallback(status === 204, id));
+}
+
 export {
     petTreatments,
     petDetails,
     addTreatment,
-    amendTreatment
+    amendTreatment,
+    deleteTreatment
 };

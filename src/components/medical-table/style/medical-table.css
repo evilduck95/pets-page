@@ -4,6 +4,7 @@
 }
 
 .table-container > * {
+    /* TODO: I really don't like this forced style just for the table headers. If we can get bootstrap to behave then we don't need this */
     color: aliceblue !important;
 }
 

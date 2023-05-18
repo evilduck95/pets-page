@@ -11,21 +11,24 @@ import { addTreatment } from 'utils/pet-api';
 import './style/treatment-cell.css';
 
 
-const TreatmentCell = ({ medicationName, dateStartOfDay, treatments, beforeIndicator, afterIndicator, clickOutside }) => {
+const TreatmentCell = ({ medicationName, dateStartOfDay, treatments, beforeIndicator, afterIndicator }) => {
     const [choosingDate, setChoosingDate] = useState(false);
+    const [treatmentList, setTreatmentList] = useState(treatments);
 
-    useEffect(() => setChoosingDate(clickOutside), [clickOutside]);
     const [searchParams, _] = useSearchParams();
     const petName = searchParams.get("name");
 
     const treatPet = (treatmentTimeToday) => {
-      console.log('Cell Date', dateStartOfDay);
         const day = new Date(dateStartOfDay);
         const time = treatmentTimeToday.$d;
-        console.log(time, day);
         day.setUTCHours(time.getUTCHours(), time.getUTCMinutes(), 0, 0);
-        console.log('Treat', day);
         addTreatment(petName, medicationName, day, res => console.log(res));
+        setChoosingDate(false);
+    }
+
+    const treatmentDeleted = (id) => {
+      console.log('treatment deleted', id)
+      setTreatmentList(treatmentList.filter(t => t.id !== id));
     }
 
     const color = 'aliceblue';
@@ -66,7 +69,7 @@ const TreatmentCell = ({ medicationName, dateStartOfDay, treatments, beforeIndic
             }
           }
         }
-      });
+    });
 
     return (
         <div className='treatment-cell'>
@@ -74,12 +77,12 @@ const TreatmentCell = ({ medicationName, dateStartOfDay, treatments, beforeIndic
             <ClickOutsideAlerter callback={() => {}}>
                 <div className='add-treatment-entry'>
                     <ThemeProvider theme={theme}>
-                        <TimePicker onAccept={treatPet} slotProps={{textField: { size: 'small' }}}/>
+                        <TimePicker onOpen={() => setChoosingDate(true)} onClose={() => setChoosingDate(false)} onAccept={treatPet} slotProps={{textField: { size: 'small' }}}/>
                     </ThemeProvider>
                 </div>
             </ClickOutsideAlerter>
             <div className="treatment-list">
-                {treatments.map(t => <TreatmentEntry treatmentId={t.id} date={t.dateTime} givenFlag={t.given}/>)}
+                {treatmentList.map(t => <TreatmentEntry key={t.id} treatmentId={t.id} date={t.dateTime} givenFlag={t.given} enabled={!choosingDate} deletedCallback={treatmentDeleted}/>)}
             </div>
             {afterIndicator && <BiChevronsRight/>}
         </div>
