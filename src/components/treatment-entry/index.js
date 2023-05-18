@@ -1,19 +1,25 @@
 import { useState } from "react"
 import { amendTreatment, deleteTreatment } from "utils/pet-api";
 import { useSearchParams } from "react-router-dom";
-
+import { MdDeleteForever } from "react-icons/md";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import './style/treatment-entry.css'
 
 
 const TreatmentEntry = ({treatmentId, date, givenFlag, enabled, deletedCallback}) => {
-    const  [given, setGiven] = useState(givenFlag);
+    const [given, setGiven] = useState(givenFlag);
+    const [loading, setLoading] = useState(false);
 
     const [searchParams] = useSearchParams();
     const petName = searchParams.get("name");
 
     const toggleTreatmentGiven = () => {
         if (enabled) {
-            amendTreatment(treatmentId, !given, updatedGiven => setGiven(updatedGiven));
+            setLoading(true);
+            amendTreatment(treatmentId, !given, updatedGiven => {
+                setGiven(updatedGiven)
+                setLoading(false);
+            });
         }
     }
 
@@ -28,7 +34,7 @@ const TreatmentEntry = ({treatmentId, date, givenFlag, enabled, deletedCallback}
         <div className="dosage-cell">
             <div className={"dosage-indicator " + (given ? "dosage-given" : "dosage-pending")} onClick={toggleTreatmentGiven}>
                 <div className="dosage-time">{date.toLocaleTimeString()}</div>
-                <div onClick={removeTreatment}>delete</div>
+                <div className="delete-button">{loading && <AiOutlineLoading3Quarters color="black" size={"2em"}/> || <MdDeleteForever color="black" size={"2em"} onClick={removeTreatment}/>}</div>
             </div>
         </div>
     )
