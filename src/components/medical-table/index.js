@@ -44,12 +44,14 @@ const MedicalTable = ({ sinceDate }) => {
 
     const [searchParams, _] = useSearchParams();
     const petName = searchParams.get("name");
-    
+
     useEffect(() => {
-        console.log(sinceDate);
-        if(!!petName) {
+        const date = new Date(sinceDate);
+        date.setTime(sinceDate.getTime() - (86400000));
+        console.log('date', date, sinceDate)
+        if(petName) {
             petDetails(petName, petDetails => setPrescriptions(petDetails.prescriptions));
-            petTreatments(petName, sinceDate, setTreatments);
+            petTreatments(petName, date, setTreatments);
         }
     }, [sinceDate]);
     
