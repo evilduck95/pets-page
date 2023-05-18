@@ -46,6 +46,7 @@ const MedicalTable = ({ sinceDate }) => {
     const petName = searchParams.get("name");
     
     useEffect(() => {
+        console.log(sinceDate);
         if(!!petName) {
             petDetails(petName, petDetails => setPrescriptions(petDetails.prescriptions));
             petTreatments(petName, sinceDate, setTreatments);

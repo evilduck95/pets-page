@@ -37,8 +37,8 @@ const addTreatment = (petName, medicationName, dateTime, resultCallback, missed 
     };
     console.log('Body', data)
     api.post('/treat', data)
-    .then(res => res.status)
-    .then(status => resultCallback(status));
+    .then(res => res.data)
+    .then(data => resultCallback(data));
 }
 
 const amendTreatment = (id, given, resultCallback) => {

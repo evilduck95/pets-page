@@ -13,7 +13,11 @@ import './style/treatment-cell.css';
 
 const TreatmentCell = ({ medicationName, dateStartOfDay, treatments, beforeIndicator, afterIndicator }) => {
     const [choosingDate, setChoosingDate] = useState(false);
-    const [treatmentList, setTreatmentList] = useState(treatments);
+    const [treatmentList, setTreatmentList] = useState([]);
+    
+    useEffect(() => {
+      setTreatmentList(treatments);
+    }, [treatments]);
 
     const [searchParams, _] = useSearchParams();
     const petName = searchParams.get("name");
@@ -21,13 +25,17 @@ const TreatmentCell = ({ medicationName, dateStartOfDay, treatments, beforeIndic
     const treatPet = (treatmentTimeToday) => {
         const day = new Date(dateStartOfDay);
         const time = treatmentTimeToday.$d;
-        day.setUTCHours(time.getUTCHours(), time.getUTCMinutes(), 0, 0);
-        addTreatment(petName, medicationName, day, res => console.log(res));
+        day.setUTCHours(time.getHours(), time.getMinutes(), 0, 0);
+        addTreatment(petName, medicationName, day, treatment => treatmentAdded(treatment));
         setChoosingDate(false);
     }
 
+    const treatmentAdded = (treatment) => {
+      treatment.dateTime = new Date(treatment.dateTime);
+      setTreatmentList([...treatmentList, treatment]);
+    }
+
     const treatmentDeleted = (id) => {
-      console.log('treatment deleted', id)
       setTreatmentList(treatmentList.filter(t => t.id !== id));
     }
 
