@@ -43,37 +43,36 @@ const TreatmentCell = ({ medicationName, dateStartOfDay, treatments, beforeIndic
 
     const theme = createTheme({
         components: {
-          MuiIconButton: {
+          MuiFormControl: {
             styleOverrides: {
-              sizeSmall: {
-                color
+              root: {
+                paddingTop: '5px',
+                paddingBottom: '5px'
               }
-            }
-          },
-          MuiInputBase: {
-            styleOverrides: {
-                root: {
-                    color
-                }
             }
           },
           MuiOutlinedInput: {
             styleOverrides: {
               root: {
-                color
+                color: 'aliceblue',
+                backgroundColor: 'var(--general-background)'
+              },
+              input: {
+                paddingTop: '6px',
+                paddingBottom: '6px',
+                color: 'rgba(255, 255, 255, 1)',
+                opacity: '1'
+              },
+              notchedOutline: {
+                borderColor: 'rgba(1, 1, 1, 0.8)'
               }
             }
           },
-          MuiInputLabel: {
+          MuiSvgIcon: {
             styleOverrides: {
               root: {
-                color
+                color: 'aliceblue'
               }
-            }
-          },
-          MuiInput: {
-            styleOverrides: {
-                color
             }
           }
         }
@@ -85,7 +84,7 @@ const TreatmentCell = ({ medicationName, dateStartOfDay, treatments, beforeIndic
             <ClickOutsideAlerter callback={() => {}}>
                 <div className='add-treatment-entry'>
                     <ThemeProvider theme={theme}>
-                        <TimePicker onOpen={() => setChoosingDate(true)} onClose={() => setChoosingDate(false)} onAccept={treatPet} slotProps={{textField: { size: 'small' }}}/>
+                        <TimePicker onOpen={() => setChoosingDate(true)} onClose={() => setChoosingDate(false)} onAccept={treatPet} slotProps={{textField: { size: 'small', placeholder: 'hh:mm' }}}/>
                     </ThemeProvider>
                 </div>
             </ClickOutsideAlerter>

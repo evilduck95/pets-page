@@ -1,4 +1,8 @@
 
+#logo {
+    border-radius: 10px;
+}
+
 .nav-item {
     color: aliceblue !important;
 }

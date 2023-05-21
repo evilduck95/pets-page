@@ -5,4 +5,5 @@ td {
 
 tr td {
     width: 300px;
+    padding-left: var(--column-spacing);
 }

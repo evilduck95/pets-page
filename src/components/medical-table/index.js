@@ -77,8 +77,9 @@ const MedicalTable = ({ sinceDate }) => {
  
     return (
         <div className="table-container">
-            <Table striped bordered hover>
+            <Table striped='columns' bordered hover variant='dark'>
                 {renderTableHeader()}
+                <tbody>
                 {prescriptions.map(p => 
                     <MedicalRow 
                         key={p.medication}
@@ -87,7 +88,7 @@ const MedicalTable = ({ sinceDate }) => {
                         treatments={findTreatemnts(p.medication)}
                     />)
                 }
-                
+                </tbody>
             </Table>
             
         </div>

@@ -1,7 +1,7 @@
 import { Container } from "react-bootstrap";
 import { Nav } from "react-bootstrap";
 import { Navbar } from "react-bootstrap";
-import DuckLogo from "./img/rubber-duck.png";
+import Logo from "./img/sick-af-dog.png";
 import './style/pets-navbar.css';
 
 const pets = [
@@ -18,8 +18,9 @@ const PetsNavbar = () => {
                 <Navbar.Brand className="nav-item" href="/">
                     <img
                         alt="Duck Logo"
-                        src={DuckLogo}
-                        height="50"
+                        src={Logo}
+                        height="100"
+                        id="logo"
                         className="d-inline-block align-top"
                     />
                 </Navbar.Brand>
