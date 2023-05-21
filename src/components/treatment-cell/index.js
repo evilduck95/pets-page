@@ -47,7 +47,8 @@ const TreatmentCell = ({ medicationName, dateStartOfDay, treatments, beforeIndic
             styleOverrides: {
               root: {
                 paddingTop: '5px',
-                paddingBottom: '5px'
+                paddingBottom: '5px',
+                width: '100%'
               }
             }
           },

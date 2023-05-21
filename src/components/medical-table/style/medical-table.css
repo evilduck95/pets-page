@@ -8,6 +8,18 @@
     /* color: aliceblue !important; */
 }
 
+.date-header {
+    /* display: inline; */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.day-date-header {
+    color: aliceblue;
+    opacity: 0.5;
+}
+
 thead > th:not(:first-child) {
     padding-left: var(--column-spacing);
 }
