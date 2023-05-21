@@ -3,8 +3,12 @@ import { useSearchParams } from "react-router-dom";
 import MedicalRow from "components/medical-row";
 import { useEffect, useState } from "react";
 import { petTreatments, petDetails } from "utils/pet-api";
+import { Button } from "@mui/material";
+import { AiOutlinePlus } from 'react-icons/ai';
+
 
 import './style/medical-table.css'
+import NewMedicationModal from "components/new-medication-modal";
 
 
 const DAYS_OF_WEEK = [
@@ -72,6 +76,7 @@ const nth = function(d) {
 const MedicalTable = ({ sinceDate }) => {
     const [treatments, setTreatments] = useState([]);
     const [prescriptions, setPrescriptions] = useState([]);
+    const [showModal, setShowModal] = useState(false);
 
     const [searchParams, _] = useSearchParams();
     const petName = searchParams.get("name");
@@ -79,7 +84,6 @@ const MedicalTable = ({ sinceDate }) => {
     useEffect(() => {
         const date = new Date(sinceDate);
         date.setTime(sinceDate.getTime() - (86400000));
-        console.log('date', date, sinceDate)
         if(petName) {
             petDetails(petName, petDetails => setPrescriptions(petDetails.prescriptions));
             petTreatments(petName, date, setTreatments);
@@ -104,6 +108,12 @@ const MedicalTable = ({ sinceDate }) => {
     const findTreatemnts = (medicationName) => {
         const matching = treatments.find(t => t.medicationName === medicationName);
         return matching?.treatments || [];
+    };
+
+    const addMedication = (event) => {
+        event.preventDefault();
+        console.log(event);
+        // console.log('Add', medicationName, medicationBrand, dose, frequency, count);
     }
  
     return (
@@ -114,14 +124,17 @@ const MedicalTable = ({ sinceDate }) => {
                 {prescriptions.map(p => 
                     <MedicalRow 
                         key={p.medication}
-                        medicationName={p.medication} 
+                        medicationName={p.medication}
                         startDate={sinceDate}
                         treatments={findTreatemnts(p.medication)}
                     />)
                 }
                 </tbody>
             </Table>
-            
+            <div id='footer-controls'>
+                <Button variant='outlined' size='large' endIcon={<AiOutlinePlus/>} onClick={() => setShowModal(true)}>Add Medication</Button>
+            </div>
+            <NewMedicationModal petName={petName} shown={showModal} closeCallback={() => setShowModal(false)} confirmCallback={addMedication}/>
         </div>
     )
 }
