@@ -3,8 +3,16 @@ import { WEEK_MILLIS } from "components/paginator";
 
 
 import './style/medical-row.css'
+import { Modal, Button } from "react-bootstrap";
+import { useState } from "react";
 
-const MedicalRow = ({medicationName, startDate, treatments}) => {
+import { MdDeleteForever } from "react-icons/md";
+import { removePrescription } from "utils/pet-api";
+
+const MedicalRow = ({prescriptionId, medicationName, startDate, treatments, removalCallback}) => {
+
+    const [showModal, setShowModal] = useState(false);
+    const [showDelete, setShowDelete] = useState(false);
 
     // TODO: NEED TO QUERY THE DATABASE FOR THESE, WE DON'T HAVE THEM OUTSIDE THE CURRENT WEEK VIEW.
     const hasFutureTreatments = () => {
@@ -39,10 +47,37 @@ const MedicalRow = ({medicationName, startDate, treatments}) => {
         return ;
     }
 
+    const deletePrescription = () => {
+        removePrescription(prescriptionId, (success, id) => success && removalCallback(id));
+    };
+
+    const renderConfirmationDialog = () => (
+        <Modal centered show={showModal} onHide={() => setShowModal(false)}>
+            <Modal.Header>
+                <Modal.Title>Are you sure?</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+                Remove prescription of <strong>{medicationName}</strong>?
+            </Modal.Body>
+            <Modal.Footer>
+                <Button variant='secondary' onClick={() => setShowModal(false)}>Cancel</Button>
+                <Button variant='primary' onClick={deletePrescription}>Confirm</Button>
+            </Modal.Footer>
+        </Modal>
+    )
+
     return(
         <tr>
-            <th scope="row">{medicationName}</th>
+            <th 
+                scope="row" 
+                onMouseEnter={() => setShowDelete(true)} 
+                onMouseLeave={() => setShowDelete(false)}
+            >
+                <div>{medicationName}</div>
+                <>{showDelete && <MdDeleteForever className='delete-button' size={20} color='orangered' onClick={() => setShowModal(true)}/>}</>
+            </th>
             {days.map(d => <td key={d.date}><TreatmentCell medicationName={medicationName} dateStartOfDay={d.date} treatments={d.treatments}/></td>)}
+            {renderConfirmationDialog()}
         </tr>
     )
 }

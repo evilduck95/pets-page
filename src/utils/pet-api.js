@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const apiUrl = 'http://192.168.1.102:8100';
+const apiUrl = 'http://localhost:8100';
 
 const api = axios.create({
     baseURL: apiUrl,
@@ -61,10 +61,35 @@ const deleteTreatment = (id, resultCallback) => {
     .then(status => resultCallback(status === 204, id));
 }
 
+const prescribeMedication = (petName, medicationName, medicationBrand, dose, count, frequency, resultCallback) => {
+    const data = {
+        petName: petName,
+        medicationName: medicationName,
+        medicationBrand: medicationBrand,
+        dose: dose,
+        count: count,
+        frequency: frequency
+    };
+    api.post('/prescribe', data)
+    .then(res => res.data)
+    .then(data => resultCallback(data));
+}
+
+const removePrescription = (id, resultCallback) => {
+    const params = {
+        id: id
+    };
+    api.delete('/prescription', { params: params })
+    .then(res => res.status)
+    .then(status => resultCallback(status === 204, id));
+}
+
 export {
     petTreatments,
     petDetails,
     addTreatment,
     amendTreatment,
-    deleteTreatment
+    deleteTreatment,
+    prescribeMedication,
+    removePrescription
 };

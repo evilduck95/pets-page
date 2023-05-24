@@ -7,3 +7,12 @@ tr td {
     width: 300px;
     padding-left: var(--column-spacing);
 }
+
+.delete-button:hover {
+    cursor: pointer;
+}
+
+.delete-button {
+    display: block;
+    margin: auto;
+}

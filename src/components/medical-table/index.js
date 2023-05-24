@@ -2,7 +2,7 @@ import { Table } from "react-bootstrap";
 import { useSearchParams } from "react-router-dom";
 import MedicalRow from "components/medical-row";
 import { useEffect, useState } from "react";
-import { petTreatments, petDetails } from "utils/pet-api";
+import { petTreatments, petDetails, prescribeMedication } from "utils/pet-api";
 import { Button } from "@mui/material";
 import { AiOutlinePlus } from 'react-icons/ai';
 
@@ -112,10 +112,28 @@ const MedicalTable = ({ sinceDate }) => {
 
     const addMedication = (event) => {
         event.preventDefault();
-        console.log(event);
-        // console.log('Add', medicationName, medicationBrand, dose, frequency, count);
+        const { formMedication, formBrand, formDosage, formFrequency, formCount } = event.target;
+        prescribeMedication(
+            petName,
+            formMedication.value,
+            formBrand.value,
+            formDosage.value,
+            formFrequency.value,
+            formCount.value,
+            res => addPrescriptionRow(res)
+        );
     }
- 
+
+    const addPrescriptionRow = (prescription) => {
+        setPrescriptions(p => [...p, prescription]);
+        setShowModal(false);
+    }
+
+    const removePrescription = (id) => {
+        const updatedPrescriptions = prescriptions.filter(p => p.id !== id);
+        setPrescriptions(updatedPrescriptions);
+    }
+
     return (
         <div className="table-container">
             <Table striped='columns' bordered hover variant='dark'>
@@ -123,10 +141,12 @@ const MedicalTable = ({ sinceDate }) => {
                 <tbody>
                 {prescriptions.map(p => 
                     <MedicalRow 
-                        key={p.medication}
+                        key={p.id}
+                        prescriptionId={p.id}
                         medicationName={p.medication}
                         startDate={sinceDate}
                         treatments={findTreatemnts(p.medication)}
+                        removalCallback={removePrescription}
                     />)
                 }
                 </tbody>

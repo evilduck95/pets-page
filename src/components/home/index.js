@@ -5,19 +5,13 @@ const Home = () => {
     return (
         <div className="App">
             <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo" />
-                <p>
-                    Edit <code>src/App.js</code> and save to reload.
-                </p>
-                <a
-                    className="App-link"
-                    href="https://reactjs.org"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    Learn React
-                </a>
+                <h1>Pet Medication Tracker</h1>
+                Welcome to the Beta version of the Pet Medication Tracker!
+                If you have any suggestions or feedback please <a href='mailto:keiranbrown95@gmail.com?subject=Pet Med Tracker Feedback'>send me an email</a>
             </header>
+            <div className='main-body'>
+                
+            </div>
         </div>
     )
 }
