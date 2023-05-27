@@ -3,7 +3,7 @@ import axios from "axios";
 console.log(process.env);
 console.log(`Pets API: ${process.env.API_URL}`)
 
-const apiUrl = 'http://192.168.1.102:8100';
+const apiUrl = `http://${process.env.API_URL}`;
 
 const api = axios.create({
     baseURL: apiUrl,
