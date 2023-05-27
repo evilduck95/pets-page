@@ -1,14 +1,15 @@
+import React from 'react';
 import { Table } from "react-bootstrap";
 import { useSearchParams } from "react-router-dom";
-import MedicalRow from "components/medical-row";
+import MedicalRow from "AppRoot/components/medical-row";
 import { useEffect, useState } from "react";
-import { petTreatments, petDetails, prescribeMedication } from "utils/pet-api";
+import { petTreatments, petDetails, prescribeMedication } from "AppRoot/utils/pet-api";
 import { Button } from "@mui/material";
 import { AiOutlinePlus } from 'react-icons/ai';
 
 
 import './style/medical-table.css'
-import NewMedicationModal from "components/new-medication-modal";
+import NewMedicationModal from "AppRoot/components/new-medication-modal";
 
 
 const DAYS_OF_WEEK = [

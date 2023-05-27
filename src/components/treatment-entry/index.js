@@ -1,5 +1,6 @@
+import React from 'react';
 import { useState } from "react"
-import { amendTreatment, deleteTreatment } from "utils/pet-api";
+import { amendTreatment, deleteTreatment } from "AppRoot/utils/pet-api";
 import { useSearchParams } from "react-router-dom";
 import { MdDeleteForever } from "react-icons/md";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";

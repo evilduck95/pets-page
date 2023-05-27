@@ -1,11 +1,12 @@
-import TreatmentEntry from 'components/treatment-entry';
+import React from 'react';
+import TreatmentEntry from 'AppRoot/components/treatment-entry';
 import { BiChevronsLeft, BiChevronsRight } from 'react-icons/bi';
 import { TimePicker } from '@mui/x-date-pickers';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useSearchParams } from "react-router-dom";
 import { useEffect, useState } from 'react';
-import ClickOutsideAlerter from 'components/click-outside-alerter';
-import { addTreatment } from 'utils/pet-api';
+import ClickOutsideAlerter from 'AppRoot/components/click-outside-alerter';
+import { addTreatment } from 'AppRoot/utils/pet-api';
 
 
 import './style/treatment-cell.css';

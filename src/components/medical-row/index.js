@@ -1,5 +1,6 @@
-import TreatmentCell from "components/treatment-cell";
-import { WEEK_MILLIS } from "components/paginator";
+import React from 'react';
+import TreatmentCell from "AppRoot/components/treatment-cell";
+import { WEEK_MILLIS } from "AppRoot/components/paginator";
 
 
 import './style/medical-row.css'
@@ -7,7 +8,7 @@ import { Modal, Button } from "react-bootstrap";
 import { useState } from "react";
 
 import { MdDeleteForever } from "react-icons/md";
-import { removePrescription } from "utils/pet-api";
+import { removePrescription } from "AppRoot/utils/pet-api";
 
 const MedicalRow = ({prescriptionId, medicationName, startDate, treatments, removalCallback}) => {
 

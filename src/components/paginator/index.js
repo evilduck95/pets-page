@@ -1,3 +1,4 @@
+import React from 'react';
 import { MdSkipPrevious, MdSkipNext, MdArrowBack, MdArrowForward } from 'react-icons/md';
 
 import './style/paginator.css';

@@ -1,8 +1,7 @@
-import Paginator from "components/paginator"
-import MedicalTable from "components/medical-table"
+import React from 'react';
+import Paginator from "AppRoot/components/paginator"
+import MedicalTable from "AppRoot/components/medical-table"
 import { useSearchParams } from "react-router-dom";
-import { createBrowserHistory } from "history";
-import qs from 'qs';
 import { useState } from "react"
 
 const MedicalView = () => {

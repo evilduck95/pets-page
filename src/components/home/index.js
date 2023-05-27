@@ -1,4 +1,4 @@
-import logo from './img/logo.svg';
+import React from 'react';
 import './style/home.css';
 
 const Home = () => {
