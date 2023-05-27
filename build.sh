@@ -1,3 +1,3 @@
 npm i
-npm build
+npm buildProd
 docker-compose up -d

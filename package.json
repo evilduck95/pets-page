@@ -28,6 +28,7 @@
   "scripts": {
     "start": "webpack serve --open --config webpack.config.dev.js",
     "build": "webpack --config webpack.config.dev.js",
+    "buildProd": "webpack --config webpack.config.production.js",
     "serve": "npm run build && serve -s dist",
     "test": "react-scripts test"
   },
@@ -53,6 +54,7 @@
     "@babel/core": "^7.22.1",
     "@babel/preset-env": "^7.22.2",
     "babel-loader": "^9.1.2",
+    "dotenv": "^16.0.3",
     "html-webpack-plugin": "^5.5.1",
     "react-router-dom": "^6.10.0",
     "webpack": "^5.84.1",

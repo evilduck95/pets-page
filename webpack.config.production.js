@@ -4,7 +4,7 @@ const webpack = require('webpack');
 const dotenv = require('dotenv');
 
 const baseEnv = dotenv.config({
-  path: './.env'
+  path: './.env.production'
 });
 
 // Leaving the env var here just in case I ever need it (at time of writing it has 1 var in it).
@@ -12,10 +12,7 @@ module.exports = (env) => {
     console.log('Environment', JSON.stringify(baseEnv, null, 2));
 
     return {
-        mode: 'development',
-        devServer: {
-          historyApiFallback: true
-        },
+        mode: 'production',
         entry: path.resolve(__dirname, 'src', 'index.js'),
         output: {
             path: path.resolve(__dirname, 'dist'),
