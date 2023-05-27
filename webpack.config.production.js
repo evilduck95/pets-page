@@ -17,6 +17,7 @@ module.exports = (env) => {
         output: {
             path: path.resolve(__dirname, 'dist'),
             filename: 'bundle.js'
+            // publicPath: baseEnv.parsed.BASE_URL
         },
         resolve: {
             alias: {

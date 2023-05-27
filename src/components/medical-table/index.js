@@ -89,7 +89,7 @@ const MedicalTable = ({ sinceDate }) => {
             petDetails(petName, petDetails => setPrescriptions(petDetails.prescriptions));
             petTreatments(petName, date, setTreatments);
         }
-    }, [sinceDate]);
+    }, [sinceDate, petName]);
     
     const renderTableHeader = () => {
         const daysOfTheWeek = new Array(7).fill().map((_, i) => {

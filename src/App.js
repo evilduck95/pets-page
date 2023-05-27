@@ -9,15 +9,17 @@ import MedicalView from './components/medical-view';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+console.log('Using base url', process.env.BASE_URL);
+
 function App() {
   return (
     <>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <BrowserRouter basename={process.env.BASE_URL}>
         <PetsNavbar/>
-        <BrowserRouter>
           <Routes>
-            <Route index element={<Home />} />
-            <Route path="pet" element={<MedicalView/>} />
+            <Route path="*/pet" element={<MedicalView/>} />
+            <Route path='*' element={<Home />} />
           </Routes>
         </BrowserRouter>
       </LocalizationProvider>
