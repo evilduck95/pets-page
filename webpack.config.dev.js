@@ -4,7 +4,7 @@ const webpack = require('webpack');
 const dotenv = require('dotenv');
 
 const baseEnv = dotenv.config({
-  path: './.env'
+  path: './.env.local'
 });
 
 // Leaving the env var here just in case I ever need it (at time of writing it has 1 var in it).

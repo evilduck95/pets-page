@@ -5,7 +5,7 @@ COPY package.json .
 COPY package-lock.json .
 RUN npm install
 COPY . .
-RUN npm run build
+RUN npm run buildProd
 
 # Used tutorial from 2023/02/01 (https://www.knowledgehut.com/blog/web-development/how-to-dockerize-react-app) for this version.
 # Stage 2 - Build the NGINX instance and pop the app in here.
