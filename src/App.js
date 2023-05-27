@@ -18,7 +18,7 @@ function App() {
         <BrowserRouter basename={process.env.BASE_URL}>
         <PetsNavbar/>
           <Routes>
-            <Route path="*/pet" element={<MedicalView/>} />
+            <Route path="/pet" element={<MedicalView/>} />
             <Route path='*' element={<Home />} />
           </Routes>
         </BrowserRouter>
