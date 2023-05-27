@@ -1,1 +1,2 @@
-docker-compose up -d --force-recreate
+echo "Creating app for production"
+docker-compose up -d --build --force-recreate
