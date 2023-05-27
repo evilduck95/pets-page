@@ -3,6 +3,7 @@ import { Container } from "react-bootstrap";
 import { Nav } from "react-bootstrap";
 import { Navbar } from "react-bootstrap";
 import { NavLink } from 'react-router-dom';
+import { NavbarBrand } from 'react-bootstrap/esm';
 import Logo from "./img/sick-af-dog.png";
 import './style/pets-navbar.css';
 
@@ -17,7 +18,7 @@ const PetsNavbar = () => {
     return (
         <Navbar>
             <Container>
-                <Navbar.Brand className="nav-item" href="/">
+                <Navbar.Brand className="nav-item" href={`/${process.env.BASE_URL}`}>
                     <img
                         alt="Duck Logo"
                         src={Logo}
