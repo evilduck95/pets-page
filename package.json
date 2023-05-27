@@ -28,6 +28,7 @@
   "scripts": {
     "start": "webpack serve --open --config webpack.config.dev.js",
     "build": "webpack --config webpack.config.dev.js",
+    "serve": "npm run build && serve -s dist",
     "test": "react-scripts test"
   },
   "eslintConfig": {

@@ -24,6 +24,10 @@ const TreatmentEntry = ({treatmentId, date, givenFlag, enabled, deletedCallback}
         }
     }
 
+    // TODO: If the treatment was JUST created and the page hasn't refreshed then this won't work as we don't know the Database ID.
+    // 2 Options:
+    // - Try with time and see if the backend can find it reliably? 
+    // - Ensure creating a treatment brings back the ID and put it into the component state plixy plox? (atm this sounds better to me imo, lmao, lol even)
     const removeTreatment = (event) => {
         if (enabled) {
             deleteTreatment(treatmentId, (success, id) => success && deletedCallback(id));

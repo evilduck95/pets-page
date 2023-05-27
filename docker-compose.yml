@@ -1,0 +1,16 @@
+version: '3.8'
+
+services: 
+  app:
+    container_name: pet-medication-tracker
+    image: medication-tracker
+    build: 
+      context: .
+    ports: 
+      - 8080:80
+    networks:
+      - pet-network
+networks: 
+  pet-network:
+    driver: bridge
+    external: true
