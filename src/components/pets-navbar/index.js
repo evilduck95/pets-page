@@ -18,7 +18,7 @@ const PetsNavbar = () => {
     return (
         <Navbar>
             <Container>
-                <Navbar.Brand className="nav-item" href={`/${process.env.BASE_URL}`}>
+                <Navbar.Brand className="nav-item" href={`${process.env.BASE_URL}`}>
                     <img
                         alt="Duck Logo"
                         src={Logo}
