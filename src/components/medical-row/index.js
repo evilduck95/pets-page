@@ -8,9 +8,10 @@ import { Modal, Button } from "react-bootstrap";
 import { useState } from "react";
 
 import { MdDeleteForever } from "react-icons/md";
+import { IoMdArrowDropup, IoMdArrowDropdown } from 'react-icons/io';
 import { removePrescription } from "AppRoot/utils/pet-api";
 
-const MedicalRow = ({prescriptionId, medicationName, startDate, treatments, removalCallback}) => {
+const MedicalRow = ({prescriptionId, medicationName, startDate, treatments, rearrangeCallback, removalCallback}) => {
 
     const [showModal, setShowModal] = useState(false);
     const [showDelete, setShowDelete] = useState(false);
@@ -67,16 +68,31 @@ const MedicalRow = ({prescriptionId, medicationName, startDate, treatments, remo
         </Modal>
     )
 
-    return(
-        <tr>
+    const renderMedicationInfo = () => {
+        return (
             <th 
                 scope="row" 
                 onMouseEnter={() => setShowDelete(true)} 
                 onMouseLeave={() => setShowDelete(false)}
             >
-                <div>{medicationName}</div>
-                <>{showDelete && <MdDeleteForever className='delete-button' size={20} color='orangered' onClick={() => setShowModal(true)}/>}</>
+                <div className='medication-info'>
+                    <div className='medication-name'>
+                        <div>{medicationName}</div>
+                        <div>{showDelete && <MdDeleteForever className='icon-button delete-button' size={20} color='orangered' onClick={() => setShowModal(true)}/>}</div>
+                    </div>
+                    <div className='medication-rearrange-buttons'>
+                        <IoMdArrowDropup className='icon-button' onClick={() => rearrangeCallback(prescriptionId, -1)}/>
+                        <div className='medication-rearrange-buttons-spacer'/>
+                        <IoMdArrowDropdown className='icon-button' onClick={() => rearrangeCallback(prescriptionId, 1)}/>
+                    </div>
+                </div>
             </th>
+        );
+    }
+
+    return(
+        <tr>
+            {renderMedicationInfo()}
             {days.map(d => <td key={d.date}><TreatmentCell medicationName={medicationName} dateStartOfDay={d.date} treatments={d.treatments}/></td>)}
             {renderConfirmationDialog()}
         </tr>

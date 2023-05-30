@@ -8,11 +8,22 @@ tr td {
     padding-left: var(--column-spacing);
 }
 
-.delete-button:hover {
+
+.icon-button:hover {
     cursor: pointer;
 }
 
 .delete-button {
     display: block;
     margin: auto;
+}
+
+.medication-info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.medication-rearrange-buttons {
+    height: 100%;
 }

@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { petTreatments, petDetails, prescribeMedication } from "AppRoot/utils/pet-api";
 import { Button } from "@mui/material";
 import { AiOutlinePlus } from 'react-icons/ai';
+import { getPrescriptionsOrdering, setPrescriptionOrdering } from 'AppRoot/utils/storage';
 
 
 import './style/medical-table.css'
