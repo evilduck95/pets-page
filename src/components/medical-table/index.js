@@ -87,11 +87,27 @@ const MedicalTable = ({ sinceDate }) => {
         const date = new Date(sinceDate);
         date.setTime(sinceDate.getTime() - (86400000));
         if(petName) {
-            petDetails(petName, petDetails => setPrescriptions(petDetails.prescriptions));
+            petDetails(petName, petDetails => setPrescriptionsWithOrder(petDetails.prescriptions));
             petTreatments(petName, date, setTreatments);
         }
     }, [sinceDate, petName]);
     
+
+    const setPrescriptionsWithOrder = (pres) => {
+        const ids = pres.map(p => p.id);
+        const savedOrder = getPrescriptionsOrdering(petName) || [];
+        const newIds = ids.filter(id => !savedOrder.includes(id));
+        savedOrder.push(...newIds);
+        setPrescriptionOrdering(petName, savedOrder);
+        setPrescriptionsInSavedOrder(pres);
+    }
+
+    const setPrescriptionsInSavedOrder = (pres) => {
+        const savedOrder = getPrescriptionsOrdering(petName) || [];
+        const orderedPrescriptions = savedOrder.map(s => pres.find(p => p.id === s));
+        setPrescriptions(orderedPrescriptions);
+    }
+
     const renderTableHeader = () => {
         const daysOfTheWeek = new Array(7).fill().map((_, i) => {
             const day = new Date();
@@ -138,6 +154,18 @@ const MedicalTable = ({ sinceDate }) => {
         setPrescriptions(updatedPrescriptions);
     }
 
+    const moveRow = (id, direction) => {
+        const order = getPrescriptionsOrdering(petName) || [];
+        const idx = order.indexOf(id);
+        const swapIdx = idx + direction;
+        if(swapIdx < 0 || swapIdx > prescriptions.length) return;
+        const tmp = order[idx];
+        order[idx] = order[swapIdx];
+        order[swapIdx] = tmp;
+        setPrescriptionOrdering(petName, order);
+        setPrescriptionsInSavedOrder(prescriptions);
+    }
+
     return (
         <div className="table-container">
             <div className='table-responsive-xl'>
@@ -151,6 +179,7 @@ const MedicalTable = ({ sinceDate }) => {
                         medicationName={p.medication}
                         startDate={sinceDate}
                         treatments={findTreatemnts(p.medication)}
+                        rearrangeCallback={moveRow}
                         removalCallback={removePrescription}
                     />)
                 }
@@ -158,7 +187,7 @@ const MedicalTable = ({ sinceDate }) => {
             </Table>
             </div>
             <div id='footer-controls'>
-                <Button variant='outlined' size='large' endIcon={<AiOutlinePlus/>} onClick={() => setShowModal(true)}>Add Medication</Button>
+                <Button variant='contained' size='large' endIcon={<AiOutlinePlus/>} onClick={() => setShowModal(true)}>Add Medication</Button>
             </div>
             <NewMedicationModal petName={petName} shown={showModal} closeCallback={() => setShowModal(false)} confirmCallback={addMedication}/>
         </div>
