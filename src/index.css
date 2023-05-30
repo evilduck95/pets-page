@@ -5,7 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #212529 !important;
+  background-color: var(--general-background) !important;
 }
 
 code {
@@ -15,12 +15,12 @@ code {
 
 
 :root {
-  --general-background: #00425A;
-  --general-light: #1F8A70;
+  --general-background: #068DA9;
+  --general-light: #ECF8F9;
   --positive: #BFDB38;
   --negative: #FC7300;
-  /* --bs-border-color: white !important; */
-  /* --bs-body-color: white !important; */
+  --text-dark: 'black';
+  --text-light: 'aliceblue';
   --column-spacing: 5px;
   --first-column-spacing: 40px
 }

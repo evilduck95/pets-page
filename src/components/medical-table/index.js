@@ -100,8 +100,10 @@ const MedicalTable = ({ sinceDate }) => {
         });
         return (
             <thead>
-                <th>{petName}</th>
-                {daysOfTheWeek.map(d => <th key={DAYS_OF_WEEK[d.getDay()]}><div className='date-header'><div className='day-name-header'>{DAYS_OF_WEEK[d.getDay()]}</div><div className='day-date-header'>{nth(d)}</div></div></th>)}
+                <tr>
+                    <th>{petName}</th>
+                    {daysOfTheWeek.map(d => <th key={DAYS_OF_WEEK[d.getDay()]}><div className='date-header'><div className='day-name-header'>{DAYS_OF_WEEK[d.getDay()]}</div><div className='day-date-header'>{nth(d)}</div></div></th>)}
+                </tr>
             </thead>
         );
     };
@@ -137,7 +139,8 @@ const MedicalTable = ({ sinceDate }) => {
 
     return (
         <div className="table-container">
-            <Table striped='columns' bordered hover variant='dark'>
+            <div className='table-responsive-xl'>
+            <Table striped='columns' bordered hover variant='light'>
                 {renderTableHeader()}
                 <tbody>
                 {prescriptions.map(p => 
@@ -152,6 +155,7 @@ const MedicalTable = ({ sinceDate }) => {
                 }
                 </tbody>
             </Table>
+            </div>
             <div id='footer-controls'>
                 <Button variant='outlined' size='large' endIcon={<AiOutlinePlus/>} onClick={() => setShowModal(true)}>Add Medication</Button>
             </div>

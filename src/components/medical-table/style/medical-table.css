@@ -9,15 +9,13 @@
 }
 
 .date-header {
-    /* display: inline; */
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
 
 .day-date-header {
-    color: aliceblue;
-    opacity: 0.5;
+    color: var(--text-dark);
 }
 
 thead > th:not(:first-child) {
@@ -32,4 +30,10 @@ thead > th:first-child {
     width: 100%;
     display: flex;
     justify-content: center;
+}
+
+@media only screen and (max-width: 1400px) {
+    .date-header {
+        flex-direction: column;
+    }    
 }

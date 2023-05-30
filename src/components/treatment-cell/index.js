@@ -32,6 +32,7 @@ const TreatmentCell = ({ medicationName, dateStartOfDay, treatments, beforeIndic
     }
 
     const treatmentAdded = (treatment) => {
+      console.log('Treatment Added', treatment)
       treatment.dateTime = new Date(treatment.dateTime);
       setTreatmentList([...treatmentList, treatment]);
     }

@@ -1,9 +1,7 @@
 import React from 'react';
 import { Container } from "react-bootstrap";
-import { Nav } from "react-bootstrap";
 import { Navbar } from "react-bootstrap";
 import { NavLink } from 'react-router-dom';
-import { NavbarBrand } from 'react-bootstrap/esm';
 import Logo from "./img/sick-af-dog.png";
 import './style/pets-navbar.css';
 
@@ -30,7 +28,7 @@ const PetsNavbar = () => {
                 {pets.map(p => <NavLink className="nav-item" key={p} aria-current="page" to={`/pet?name=${p}`}>{p}</NavLink>)}
             </Container>
         </Navbar>
-    )
+    );
 }
 
 export default PetsNavbar;
