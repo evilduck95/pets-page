@@ -32,6 +32,7 @@
     "serve": "npm run build && serve -s dist",
     "test": "react-scripts test"
   },
+  "homepage": "http://evilduck95.net/pet-tracker",
   "eslintConfig": {
     "extends": [
       "react-app",
