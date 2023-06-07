@@ -16,8 +16,8 @@ module.exports = (env) => {
         entry: path.resolve(__dirname, 'src', 'index.js'),
         output: {
             path: path.resolve(__dirname, 'dist'),
-            filename: 'bundle.js'
-            // publicPath: baseEnv.parsed.BASE_URL
+            filename: 'bundle.js',
+            publicPath: '/pet-tracker'
         },
         resolve: {
             alias: {
