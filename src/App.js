@@ -15,7 +15,7 @@ function App() {
   return (
     <>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <BrowserRouter basename={process.env.BASE_URL}>
+        <BrowserRouter>
         <PetsNavbar/>
           <Routes>
             <Route path="/pet" element={<MedicalView/>} />
