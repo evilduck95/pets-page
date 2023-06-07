@@ -47,8 +47,8 @@ module.exports = (env) => {
               'process.env': JSON.stringify(baseEnv.parsed)
             }),
             new HtmlWebpackPlugin({
-              template: 'public/index.html',
-              base: '/pet-tracker'
+              title: 'Pet Medication Tracker',
+              template: 'public/index.html'
             })
         ]
     }
